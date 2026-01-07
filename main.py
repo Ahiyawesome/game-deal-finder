@@ -3,10 +3,13 @@ import time
 
 
 def get_response_data(url, addition="", param=None, id=None):
+    if id:
+        ls = id.split()
+        id = "%20".join(ls)
     response = requests.get(url + addition + ("?"+param+"="+id if param else ""))
     time.sleep(2)
     data = response.json()
-    
+
     return data
 
 
