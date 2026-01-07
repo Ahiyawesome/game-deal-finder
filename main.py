@@ -1,11 +1,14 @@
 import requests
 import time
 
+
 def get_response_data(url, addition="", param=None, id=None):
     response = requests.get(url + addition + ("?"+param+"="+id if param else ""))
     time.sleep(2)
     data = response.json()
+    
     return data
+
 
 def get_stores(url):
     data = get_response_data(url, "stores")
@@ -38,7 +41,6 @@ def find_top_n_deals(url, game, store_dict, k):
     return (top_three, n)
 
 
-
 def main():
     wishlist = []
     cur_game = "p"
@@ -49,11 +51,8 @@ def main():
         if cur_game != "p":
             wishlist.append(cur_game)
         cur_game = input("What game do you want on your wishlist? Type f if finished: ")
-        
-            
 
     n = int(input("How many top deals do you want to see? "))
-    
     if not n:
         n = 1
 
