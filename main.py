@@ -39,7 +39,7 @@ def find_top_n_deals(url, game, store_dict, k):
     data = get_response_data(url, "games", "id", game["gameID"])
     deals = data["deals"]
     n = k if len(deals) >= k else len(deals)
-    top_three = [{"price": deals[i]["price"], "store": store_dict[deals[i]["storeID"]]} for i in range(n)]
+    top_three = [{"price": deals[i]["price"], "store": store_dict[deals[i]["storeID"]], "linkID":deals[i]["dealID"]} for i in range(n)]
 
     return (top_three, n)
 
@@ -68,7 +68,7 @@ def main():
             if top_n_deals:
                 print(f"Top {n} deals for {wish}")
                 for deal in top_n_deals:
-                    print(f"${deal['price']} at store: {deal['store']}")
+                    print(f"${deal['price']} at store: {deal['store']}. https://www.cheapshark.com/redirect?dealID={deal['linkID']}")
                 print()
             else:
                 print(f"Due to error, couldn't get {wish}")
